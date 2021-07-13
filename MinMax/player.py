@@ -7,11 +7,11 @@ class Player(GomokuAgent):
     N_MOVES_PREDICT = 4; # how many turns ahead to predict outcomes when choosing a move (alternating between self and opponent)
     TIME_LIMIT = 4.8; # how much time to allow recursive function to continue before returning a move
 
-    moveStart = 0; # what time the programs turn started
-    outOfTime = False; # whether or not the program has run out of time
+    moveStart = 0; # what time the AI's turn started
+    outOfTime = False; # whether or not the AI has run out of time
 
     VERY_BIG_INT = 1000000;
-    RANGE11 = list(range(11)); # for use in loops across a board (list/tuple access is faster than range access)
+    RANGE11 = list(range(11)); # for use in loops across a board (list/tuple access is faster than range initialization)
     DIAMETERS = [ # the relative positions of squares relevant to a root square, aranged as such:  [i][j][k]  i for diagonal-down, vertical, diagonal-up, horizontal.
         [                                                                                                  #  j for 1st direction in line, 2nd direction in line.
             [(-1, -1),(-2, -2),(-3, -3),(-4, -4)],                                                         #  k for closest, 2nd closest, 3rd closest, 4th closest.
@@ -50,11 +50,11 @@ class Player(GomokuAgent):
         if(board[rootX][rootY] == 0): # quick check if the move is legal
             score = 0; # how beneficial this move is to the given player
             lineOf4 = False; # whether the given player has a line of 3 out of 5 that this root square would extend to a line of 4 out of 5
-            winIn2 = False;
+            winIn2 = False; # whether taking this root square would guarantee a win next turn
             for diameter in self.DIAMETERS:
                 completedLine = 0; # number of continuous peices of the given player that extend through this root square for this diameter
                 partialLine = 0; # number of peices of the given player that are in this diameter and not cut off from the root square by an opponents' peice
-                availableLine = 0; # number of (peices of the given player or empty squares) that are in this diameter and not cut off by an opponents' peice
+                availableLine = 0; # number of peices of the given player or empty squares that are in this diameter and not cut off by an opponents' peice
                 open4 = 0; # number of open ends in current diameter where current diameter must have a line of 3 that passes through the root square
                 for radius in diameter:
                     lineBroken = False; # whether the current radius has reached an unclaimed square
@@ -232,7 +232,7 @@ class Player(GomokuAgent):
         newBoard[pos[0]][pos[1]] = playerID;
         return newBoard;
 
-    # add the contents of 2 scoreboards, applying the given weight to the second board given
+    # add the contents of 2 scoreboards
     # returns the resultant scoreboard
     def addBoards(self, scoreBoard1, scoreBoard2):
         newScoreBoard = [];
