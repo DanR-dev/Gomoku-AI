@@ -1,7 +1,12 @@
 # Gomoku-AI
+(MinMax/player.py)
+
+### How it Works
 
 
+### Selfish Heuristic
 
+### MinMax Implementation
 
 ### Credit for the Included Gomoku Platform Files
 (gomoku.py, gomokuAgent.py, misc.py)
