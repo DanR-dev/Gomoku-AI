@@ -23,7 +23,7 @@ To simplify, it will prioritise setting up as many lines as possible that are as
 - If no winning or required move has been found, then the initial moves will be scored based on their predicted outcomes (as far ahead as the algorithm has considered) and the one with the best outcome will be returned as the actual best move.
 
 ### Development Environment
-- ubuntu 20.04
+- Ubuntu 20.04
 - Python 3.8.5
 
 ### Credit for the Included Gomoku Platform Files
